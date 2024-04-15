@@ -3,6 +3,9 @@ package tp_6_com2.vistas;
 
 import java.util.TreeSet;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tp_6_com2.entidades.Producto;
 
@@ -138,6 +141,7 @@ private void borrarFilas(){
 
     private void jtPrecioMaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPrecioMaxKeyReleased
          borrarFilas();
+         if(validaReal(jtPrecioMin.getText())&& validaReal(jtPrecioMax.getText())){
          Double min= Double.parseDouble(jtPrecioMin.getText());
          Double max= Double.parseDouble(jtPrecioMax.getText());
       for (Producto prod : productos) {
@@ -151,7 +155,17 @@ private void borrarFilas(){
                 modelo.addRow(renglon);
             }
     }//GEN-LAST:event_jtPrecioMaxKeyReleased
+    }else {JOptionPane.showMessageDialog(this, "Ingresar un número");
+            jtPrecioMin.requestFocus();
+            return;    
     }
+    }
+    private boolean validaReal(String nro){
+    Pattern patron=Pattern.compile("[0-9]+(?:\\.[0-9]+)?");
+        Matcher m=patron.matcher(nro);
+        return m.matches();
+        
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
